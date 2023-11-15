@@ -31,9 +31,15 @@ enum layers{
 };
 
 enum custom_keycodes {
-    RGB_MODE_FANCY = SAFE_RANGE,
-    RGB_MODE_HEAT,
-    RGB_MODE_CYCLE,
+    RGB_MODE_MATRIX_SOLID_COLOR = SAFE_RANGE,
+    RGB_MODE_MATRIX_ALPHAS_MODS,
+    RGB_MODE_MATRIX_GRADIENT_LEFT_RIGHT,
+    RGB_MODE_MATRIX_BREATHING,
+    RGB_MODE_MATRIX_CYCLE_ALL,
+    RGB_MODE_MATRIX_CYCLE_LEFT_RIGHT,
+    RGB_MODE_MATRIX_TYPING_HEATMAP,
+    RGB_MODE_MATRIX_SOLID_REACTIVE_MULTIWIDE,
+    RGB_MODE_MATRIX_SPLASH,
 };
 
 
@@ -44,7 +50,7 @@ enum custom_keycodes {
 
 // special handling keys
 #define KC__ESC LT(FN, KC_ESC)
-#define KC__CAP LT(UM, KC_ESC)
+#define KC__CAP MT(MOD_LCTL | MOD_LGUI, KC_ESC)
 
 #define KC__F1 LT(LED_H, KC_F1)
 #define KC__F2 LT(LED_S, KC_F2)
@@ -65,42 +71,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_TAB,     KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,  KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
         KC__CAP,     KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,  KC_SCLN,  KC_QUOT,             KC_ENT,            KC_HOME,
         KC_LSFT,               KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,  KC_COMM,   KC_DOT,  KC_SLSH,            KC_RSFT,    KC_UP,
-        KC_LCTL,  KC_LCMD,  KC_LALT,                                 KC_SPC,                                KC_RALT,   TT(FN),  KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
+        KC_LCTL,  KC_LGUI,  KC_LALT,                                 KC_SPC,                                KC_RALT,   TT(FN),  KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
     [FN] = LAYOUT_ansi_82(
          KC_ESC,    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,   KC_F10,   KC_F11,   KC_F12,  _______,            _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            KC_WH_U,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_BTN2,            KC_WH_D,
-        KC_CAPS,  _______,  _______,  _______,  _______,  _______,  KC_MS_L,  KC_MS_D,  KC_MS_U,  KC_MS_R,  _______,  _______,            KC_BTN1,            _______,
+        _______,  _______,  _______,  _______,  _______,  _______,  KC_MS_L,  KC_MS_D,  KC_MS_U,  KC_MS_R,  _______,  _______,            KC_BTN1,            _______,
         _______,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,  KC_WH_U,
         QK_BOOT,  _______,  _______,                                KC_BTN1,                                _______, TO(BASE),  _______,  KC_WH_L,  KC_WH_D,  KC_WH_R),
     [LED_H] = LAYOUT_ansi_82(
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, RGB_MODE_MATRIX_SOLID_COLOR, RGB_MODE_MATRIX_ALPHAS_MODS, RGB_MODE_MATRIX_GRADIENT_LEFT_RIGHT, RGB_MODE_MATRIX_BREATHING, RGB_MODE_MATRIX_CYCLE_ALL, RGB_MODE_MATRIX_CYCLE_LEFT_RIGHT, RGB_MODE_MATRIX_TYPING_HEATMAP, RGB_MODE_MATRIX_SOLID_REACTIVE_MULTIWIDE, RGB_MODE_MATRIX_SPLASH, XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  RGB_M_P,  XXXXXXX,  RGB_M_F,  XXXXXXX,  RGB_M_H,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
-        XXXXXXX,            XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  RGB_M_B,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,                                RGB_MOD,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
+        XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,                                XXXXXXX,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
     [LED_S] = LAYOUT_ansi_82(
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, RGB_MODE_MATRIX_SOLID_COLOR, RGB_MODE_MATRIX_ALPHAS_MODS, RGB_MODE_MATRIX_GRADIENT_LEFT_RIGHT, RGB_MODE_MATRIX_BREATHING, RGB_MODE_MATRIX_CYCLE_ALL, RGB_MODE_MATRIX_CYCLE_LEFT_RIGHT, RGB_MODE_MATRIX_TYPING_HEATMAP, RGB_MODE_MATRIX_SOLID_REACTIVE_MULTIWIDE, RGB_MODE_MATRIX_SPLASH, XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  RGB_M_P,  XXXXXXX,  RGB_M_F,  XXXXXXX,  RGB_M_H,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
-        XXXXXXX,            XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  RGB_M_B,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,                                RGB_MOD,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
+        XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,                                XXXXXXX,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
     [LED_V] = LAYOUT_ansi_82(
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, RGB_MODE_MATRIX_SOLID_COLOR, RGB_MODE_MATRIX_ALPHAS_MODS, RGB_MODE_MATRIX_GRADIENT_LEFT_RIGHT, RGB_MODE_MATRIX_BREATHING, RGB_MODE_MATRIX_CYCLE_ALL, RGB_MODE_MATRIX_CYCLE_LEFT_RIGHT, RGB_MODE_MATRIX_TYPING_HEATMAP, RGB_MODE_MATRIX_SOLID_REACTIVE_MULTIWIDE, RGB_MODE_MATRIX_SPLASH, XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  RGB_M_P,  XXXXXXX,  RGB_M_F,  XXXXXXX,  RGB_M_H,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
-        XXXXXXX,            XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  RGB_M_B,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,                                RGB_MOD,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
+        XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,                                XXXXXXX,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
     [LED_SPD] = LAYOUT_ansi_82(
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, RGB_MODE_MATRIX_SOLID_COLOR, RGB_MODE_MATRIX_ALPHAS_MODS, RGB_MODE_MATRIX_GRADIENT_LEFT_RIGHT, RGB_MODE_MATRIX_BREATHING, RGB_MODE_MATRIX_CYCLE_ALL, RGB_MODE_MATRIX_CYCLE_LEFT_RIGHT, RGB_MODE_MATRIX_TYPING_HEATMAP, RGB_MODE_MATRIX_SOLID_REACTIVE_MULTIWIDE, RGB_MODE_MATRIX_SPLASH, XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
         XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
-        XXXXXXX,  XXXXXXX,  RGB_M_P,  XXXXXXX,  RGB_M_F,  XXXXXXX,  RGB_M_H,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
-        XXXXXXX,            XXXXXXX,  XXXXXXX,  RGB_M_C,  XXXXXXX,  RGB_M_B,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
-        XXXXXXX,  XXXXXXX,  XXXXXXX,                                RGB_MOD,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+        XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
+        XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
+        XXXXXXX,  XXXXXXX,  XXXXXXX,                                XXXXXXX,                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
     [UM] = LAYOUT_ansi_82(
          KC_ESC,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
         _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
@@ -122,14 +128,32 @@ const uint16_t PROGMEM encoder_map[][1][2] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case RGB_MODE_FANCY:
-            rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE);
+        case RGB_MODE_MATRIX_SOLID_COLOR:
+            rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
             return false;
-        case RGB_MODE_HEAT:
+        case RGB_MODE_MATRIX_ALPHAS_MODS:
+            rgb_matrix_mode(RGB_MATRIX_ALPHAS_MODS);
+            return false;
+        case RGB_MODE_MATRIX_GRADIENT_LEFT_RIGHT:
+            rgb_matrix_mode(RGB_MATRIX_GRADIENT_LEFT_RIGHT);
+            return false;
+        case RGB_MODE_MATRIX_BREATHING:
+            rgb_matrix_mode(RGB_MATRIX_BREATHING);
+            return false;
+        case RGB_MODE_MATRIX_CYCLE_ALL:
+            rgb_matrix_mode(RGB_MATRIX_CYCLE_ALL);
+            return false;
+        case RGB_MODE_MATRIX_CYCLE_LEFT_RIGHT:
+            rgb_matrix_mode(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+            return false;
+        case RGB_MODE_MATRIX_TYPING_HEATMAP:
             rgb_matrix_mode(RGB_MATRIX_TYPING_HEATMAP);
             return false;
-        case RGB_MODE_CYCLE:
-            rgb_matrix_mode(RGB_MATRIX_CYCLE_ALL);
+        case RGB_MODE_MATRIX_SOLID_REACTIVE_MULTIWIDE:
+            rgb_matrix_mode(RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE);
+            return false;
+        case RGB_MODE_MATRIX_SPLASH:
+            rgb_matrix_mode(RGB_MATRIX_SPLASH);
             return false;
         default:
             return true;   // Process all other keycodes normally
@@ -158,18 +182,9 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 void set_context_leds(void) {
     uint8_t layer = biton32(layer_state);
     switch (layer) {
-        case BASE:
-            if (rgb_matrix_is_enabled()) {
-                rgb_matrix_enable();
-            } else {
-                rgb_matrix_set_color_all(0, 0, 0);
-            }
-            break;
         case FN:
-            if (rgb_matrix_is_enabled()) {
-                rgb_matrix_enable();
-            } else {
-                rgb_matrix_set_color_all(0, 0, 0);
+            if (!rgb_matrix_is_enabled()) {
+                break;
             }
             for (int i = 0; i <= 12; i++) {
                 rgb_matrix_set_color(i, 255, 255, 255); // f keys
@@ -180,35 +195,24 @@ void set_context_leds(void) {
             rgb_matrix_set_color(29, 255, 255, 255); // pgup
             rgb_matrix_set_color(43, 255, 255, 255); // backslash
             rgb_matrix_set_color(44, 255, 255, 255); // pgdn
-            rgb_matrix_set_color(45, 255, 255, 255); // caps
+            //rgb_matrix_set_color(45, 255, 255, 255); // caps
             rgb_matrix_set_color(57, 255, 255, 255); // enter
             rgb_matrix_set_color(71, 255, 255, 255); // up
             rgb_matrix_set_color(72, 255, 0, 0); // rctrl
             rgb_matrix_set_color(75, 255, 255, 255); // space
-            rgb_matrix_set_color(77, 255, 255, 255); // fn
+            //rgb_matrix_set_color(77, 255, 255, 255); // fn
             for (int i = 0; i < 3; i++) {
-                rgb_matrix_set_color(79+i, 255, 255, 255); // left down right
+                rgb_matrix_set_color(79+i, 255, 255, 255); // arros: left down right
             }
             break;
+        case BASE:
         case LED_H:
         case LED_S:
         case LED_V:
         case LED_SPD:
-            /* if (rgb_matrix_is_enabled()) { */
-            /*     rgb_matrix_enable(); */
-            /* } else { */
-            /*     rgb_matrix_set_color_all(0, 0, 0); */
-            /* } */
-            /* rgb_matrix_set_color(75, 255, 255, 255); */
-            /* break; */
         default:
             break;
     }
-    /* if (host_keyboard_led_state().caps_lock) { */
-    /*     rgb_matrix_set_color(45, 255, 255, 255); */
-    /* } else { */
-    /*     rgb_matrix_set_color(45, 0, 0, 0); */
-    /* } */
 }
 
 extern void rgb_matrix_update_pwm_buffers(void);
